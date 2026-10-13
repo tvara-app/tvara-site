@@ -63,7 +63,7 @@ Gaps worth a page next: ChatGPT memory versus chat history (once OpenAI's memory
 6. Add `sources`: the official help page or platform doc behind each claim about another product. Never cite another blog.
 7. Link to at least two related articles and the relevant platform page. Add the new article to that platform's `related` list in `src/platforms.js`.
 8. Match the extension's real gating. The speed engine, minimap, allowance tracking and archive export are free everywhere. The outline, in-chat search, timestamps and one-click export are free on ChatGPT, Perplexity, DeepSeek and Grok, and Pro (seven-day free trial) on Claude and Gemini.
-9. `npm run build`, then check `dist/<slug>/index.html` for the title, the JSON-LD and the short answer.
+9. `npm run build`, then check `dist/<slug>.html` for the title, the JSON-LD and the short answer.
 
 ## What the 2026 evidence says
 
@@ -83,7 +83,7 @@ Checked in October 2026. Most "GEO" advice online comes from vendors selling tra
 The store listing ranks in Google on its own and is often the first result for a brand query.
 
 - Never name ChatGPT, Claude, Gemini or other providers in the store title, summary or screenshots. The listing was rejected once for this. Describe the job instead: long AI chats, speed, search, backup.
-- Keep the short description to the problem and the result, for example "Keeps long AI chats fast, searchable and backed up."
+- Title and short description carry the phrases people search: "Long AI Chat Toolkit" and "long chat toolkit". The copy lives in `~/tvara/store/listing.md` and the manifest; changing them needs a new package.
 - Use all five screenshots, each with a caption that states one benefit. Add a short demo video.
 - Ask satisfied users for reviews. Rating count and recency affect store ranking.
 - Set the listing's website field to the site. The site already links to the listing from every page.
