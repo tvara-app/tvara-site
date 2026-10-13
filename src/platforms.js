@@ -30,7 +30,7 @@ export const PLATFORMS = [
     slug: "claude-extension", name: "Claude", html: claude, updated: "2026-09-17",
     title: "Long Chat Extension for Claude: Speed, Usage Limits, Backup · Tvara",
     desc: "A Chrome extension for long Claude chats: less lag, a minimap to jump between messages, your five-hour and weekly usage limits, and your Claude history saved locally.",
-    related: ["answers/claude-usage-limits", "answers/conversation-too-long-context-limit", "answers/continue-conversation-in-new-chat", "answers/why-long-ai-chats-get-slow"],
+    related: ["answers/claude-usage-limits", "answers/export-claude-conversation", "answers/conversation-too-long-context-limit", "answers/continue-conversation-in-new-chat"],
     faq: [
       { q: "Can Tvara show how much of my Claude limit is left?",
         a: "Yes. It shows your five-hour session limit and your weekly limit from Claude's own figures, with the time each resets, and leads with the one that will stop you soonest." },
@@ -44,7 +44,7 @@ export const PLATFORMS = [
     slug: "gemini-extension", name: "Gemini", html: gemini, updated: "2026-09-17",
     title: "Long Chat Extension for Gemini: Speed, Search, Backup · Tvara",
     desc: "A Chrome extension for long Gemini chats: less lag, a minimap, the usage Gemini reports, and your Gemini history saved locally from every Google account you use.",
-    related: ["answers/export-ai-chat-history", "answers/check-ai-usage-limits", "answers/using-multiple-ai-assistants"],
+    related: ["answers/gemini-usage-limits", "answers/export-gemini-conversation", "answers/using-multiple-ai-assistants"],
     faq: [
       { q: "I use Gemini with two Google accounts. Are both archived?",
         a: "Yes. Tvara finds each Google account you are signed in to and archives the Gemini chats from all of them." },

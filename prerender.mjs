@@ -18,7 +18,7 @@ const assets = [...shell.matchAll(/<(script|link)[^>]*>(?:<\/script>)?/g)]
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
-const NOSCRIPT = `<noscript><style>[data-reveal],[data-reveal-group]>*{opacity:1!important;transform:none!important}.qa-panel{grid-template-rows:1fr!important}</style></noscript>`;
+const NOSCRIPT = `<noscript><style>.qa-panel{grid-template-rows:1fr!important}</style></noscript>`;
 
 function document_(route, body, { index = true } = {}) {
   const canonical = SITE_URL + "/" + route.slug;
@@ -140,7 +140,8 @@ writeFileSync("dist/llms-full.txt", ROUTES.filter((r) => r.answer || r.platform)
   const it = r.answer || r.platform;
   const terms = (it.terms || []).map((t) => `### ${t.term}\n${t.def}`).join("\n\n");
   const faq = (it.faq || []).map((f) => `### ${f.q}\n${f.a}`).join("\n\n");
-  return `${plain(it.html)}${terms ? "\n\n" + terms : ""}\n\nSource: ${SITE_URL}/${r.slug}` + (faq ? `\n\n## Questions\n\n${faq}` : "");
+  const refs = (it.sources || []).map((s) => `- ${s.name}: ${s.url}`).join("\n");
+  return `${plain(it.html)}${terms ? "\n\n" + terms : ""}\n\nSource: ${SITE_URL}/${r.slug}` + (faq ? `\n\n## Questions\n\n${faq}` : "") + (refs ? `\n\n## References\n\n${refs}` : "");
 }).join("\n\n---\n\n") + "\n");
 
 if (existsSync("static")) cpSync("static", "dist", { recursive: true });

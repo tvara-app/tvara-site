@@ -1,0 +1,36 @@
+<h1>About Tvara</h1>
+
+<p>Tvara is a browser extension for long AI conversations. It keeps long chats on ChatGPT, Claude, Gemini, DeepSeek, Grok and Perplexity fast, lets you jump to and search any message, shows the usage limits each site reports, and keeps a copy of your conversations on your own computer. It runs in Chrome and Edge on desktop.</p>
+
+<h2>Why it exists</h2>
+
+<p>An AI conversation that works well at twenty messages often fails at four hundred, and it fails in several ways at once: the page lags, the message you need is impossible to find, the browser's own search stops finding text the site has unloaded, the model loses early decisions, and the usage limit arrives without warning. The usual advice, start a new chat, fixes the first problem by giving up the conversation. Tvara is built to fix each problem without asking you to give up the chat.</p>
+
+<h2>How it is built</h2>
+
+<ul>
+<li><strong>Your conversations stay on your device.</strong> Tvara does not send chat text, titles, prompts, exports or chat addresses anywhere. Its archive lives in the extension's own storage on your computer.</li>
+<li><strong>Narrow permissions.</strong> It asks for access to the six AI sites it supports, and it does not request the tabs, history, cookies, bookmarks, webRequest or scripting permissions.</li>
+<li><strong>Nothing is deleted to make chats fast.</strong> The speed engine tells the browser to skip drawing messages that are off screen. Every message stays in the page and in the archive.</li>
+<li><strong>One adapter per site.</strong> Each AI site has its own adapter, so when a site changes its layout, that adapter can be switched off without affecting the rest of the extension.</li>
+<li><strong>Sign-in only for Pro.</strong> Free features need no account. Google sign-in is used only to start the free trial or to buy and restore Pro.</li>
+</ul>
+
+<h2>What it costs</h2>
+
+<p>The speed engine, the minimap, usage tracking and exporting the local archive are free on every supported site. Pro is a one-time $1 purchase for up to five devices, with a seven-day free trial and no subscription. <a href="/pricing">Pricing</a>.</p>
+
+<h2>How this site is written</h2>
+
+<ul>
+<li>Every article starts with a short answer and explains what each AI site does on its own before saying what Tvara adds.</li>
+<li>Claims about ChatGPT, Claude and Gemini link to the companies' own help pages, listed under each article.</li>
+<li>Each article shows the date its text last changed. The date moves only when the text does.</li>
+<li>Where a feature is free on some sites and part of Pro on others, the article says which.</li>
+</ul>
+
+<h2>Contact</h2>
+
+<p>Email <a href="mailto:tvara.exten@gmail.com">tvara.exten@gmail.com</a> with questions, bug reports or requests for a new site. Tvara is on the <a href="https://chromewebstore.google.com/detail/ajpnackhheeafgecocapboccaplcnaje" rel="noopener">Chrome Web Store</a>, and the source of this website is on <a href="https://github.com/tvara-app/tvara-site" rel="noopener">GitHub</a>.</p>
+
+<p>Tvara is an independent product, not affiliated with or endorsed by OpenAI, Anthropic, Google, Perplexity, DeepSeek or xAI.</p>

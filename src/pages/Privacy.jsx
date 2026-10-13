@@ -2,7 +2,7 @@ import Reveal from "../components/Reveal.jsx";
 import Prose from "../components/Prose.jsx";
 import html from "../content/privacy.html?raw";
 
-const LINKS = [("/terms", "Terms"), ("/refunds", "Refunds")];
+const LINKS = [["/terms", "Terms"], ["/refunds", "Refunds"]];
 
 export default function Privacy() {
   return (

@@ -2,7 +2,7 @@ import Reveal from "../components/Reveal.jsx";
 import Prose from "../components/Prose.jsx";
 import html from "../content/terms.html?raw";
 
-const LINKS = [("/privacy", "Privacy"), ("/refunds", "Refunds")];
+const LINKS = [["/privacy", "Privacy"], ["/refunds", "Refunds"]];
 
 export default function Terms() {
   return (

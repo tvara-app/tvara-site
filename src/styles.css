@@ -645,6 +645,9 @@ section[data-section="Pricing"] .section-head p { margin-top: 11px; font-size: 1
 .prose a { color: var(--ember); text-decoration-color: rgb(255 177 133 / .35); text-underline-offset: 3px; }
 .prose a:hover { text-decoration-color: var(--ember); }
 .prose section { padding-top: 0; }
+.prose .byline { margin: 4px 0 26px; color: var(--ink-faint); font-size: 13.5px; }
+.prose .byline a { color: inherit; }
+.prose .sources li { font-size: 14.5px; }
 .terms { display: grid; gap: 26px; margin-top: 8px; }
 .terms > div { scroll-margin-top: 96px; }
 .terms dt { color: var(--ink); font-size: 17.5px; font-weight: 500; }
@@ -661,13 +664,13 @@ section[data-section="Pricing"] .section-head p { margin-top: 11px; font-size: 1
 a.chip { text-decoration: none; }
 .foot-note { margin-top: 18px; max-width: 88ch; color: var(--ink-faint); font-size: 12.5px; line-height: 1.6; }
 
-/* ---------- reveal: pre-paint state, cleared by GSAP or by reduced motion ---------- */
+/* ---------- hero title: each line out of its own mask, in CSS so it starts with the first paint ---------- */
 
-[data-reveal] { opacity: 0; }
-@media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1 !important; transform: none !important; } }
-.no-js [data-reveal] { opacity: 1; }
-[data-reveal-group] > * { opacity: 0; }
-@media (prefers-reduced-motion: reduce) { [data-reveal-group] > * { opacity: 1 !important; transform: none !important; } }
+.hero-title .line > span { animation: line-rise .95s cubic-bezier(.165, .84, .44, 1) both; }
+.hero-title .line:nth-child(2) > span { animation-delay: .075s; }
+.hero-title .line:nth-child(3) > span { animation-delay: .15s; }
+@keyframes line-rise { from { transform: translateY(112%); } }
+@media (prefers-reduced-motion: reduce) { .hero-title .line > span { animation: none; } }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .demo-msg { transition: background .35s var(--ease), transform .35s var(--ease); }
 .demo-msg.mine { justify-self: end; background: rgb(255 255 255 / .2); }

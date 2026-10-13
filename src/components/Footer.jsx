@@ -11,6 +11,7 @@ export default function Footer() {
           <a href="/guide">Guide</a>
           <a href="/faq">FAQ</a>
           <a href="/answers">Answers</a>
+          <a href="/about">About</a>
           <a href="/privacy">Privacy</a>
           <a href="/terms">Terms</a>
           <a href="/refunds">Refunds</a>

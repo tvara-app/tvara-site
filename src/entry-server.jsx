@@ -9,6 +9,7 @@ import Faq, { ITEMS as FAQ_ITEMS } from "./pages/Faq.jsx";
 import Privacy from "./pages/Privacy.jsx";
 import Terms from "./pages/Terms.jsx";
 import Refunds from "./pages/Refunds.jsx";
+import About from "./pages/About.jsx";
 import Thanks from "./pages/Thanks.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Answers from "./pages/Answers.jsx";
@@ -20,7 +21,7 @@ import { STORE_URL } from "./routes.js";
 
 const PAGES = {
   "/": Home, "/features": Features, "/pricing": Pricing, "/guide": Guide, "/faq": Faq,
-  "/privacy": Privacy, "/terms": Terms, "/refunds": Refunds, "/thanks": Thanks,
+  "/privacy": Privacy, "/terms": Terms, "/refunds": Refunds, "/thanks": Thanks, "/about": About,
   "/answers": Answers,
   ...Object.fromEntries(ANSWERS.map((a) => ["/" + a.slug, () => <Answer item={a} />])),
   ...Object.fromEntries(PLATFORMS.map((p) => ["/" + p.slug, () => <Platform item={p} />])),
@@ -53,9 +54,9 @@ export function schemaFor(route, siteUrl) {
        rich result dropped rather than granted. */
     blocks.push({
       "@context": "https://schema.org", "@type": "Organization",
-      "@id": siteUrl + "/#org", name: "Tvara", url: siteUrl + "/",
-      logo: siteUrl + "/logo.png", email: "tvara.exten@gmail.com",
-      description: route.desc, sameAs: [STORE_URL],
+      "@id": siteUrl + "/#org", name: "Tvara", alternateName: ["Tvara extension", "Tvara long chat extension"],
+      url: siteUrl + "/", logo: siteUrl + "/logo.png", email: "tvara.exten@gmail.com",
+      description: route.desc, sameAs: [STORE_URL, "https://github.com/tvara-app"],
     });
     blocks.push({
       "@context": "https://schema.org", "@type": "WebSite",
@@ -107,6 +108,7 @@ export function schemaFor(route, siteUrl) {
       mainEntityOfPage: { "@type": "WebPage", "@id": url },
       author: { "@id": siteUrl + "/#org" },
       publisher: { "@id": siteUrl + "/#org" },
+      citation: route.answer.sources?.map((s) => ({ "@type": "CreativeWork", name: s.name, url: s.url })),
       isPartOf: { "@id": siteUrl + "/#site" },
     });
   }
@@ -119,6 +121,13 @@ export function schemaFor(route, siteUrl) {
         "@type": "DefinedTerm", name: t.term, description: t.def,
         url: url + "#" + t.id, inDefinedTermSet: { "@id": url + "#terms" },
       })),
+    });
+  }
+
+  if (route.path === "/about") {
+    blocks.push({
+      "@context": "https://schema.org", "@type": "AboutPage",
+      url, name: route.title, mainEntity: { "@id": siteUrl + "/#org" },
     });
   }
 

@@ -12,12 +12,12 @@ const fine = matchMedia("(pointer: fine)").matches;
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-/* ---- arrival ---- */
-const revealed = [...$$("[data-reveal]"), ...$$("[data-reveal-group]").flatMap((g) => Array.from(g.children))];
-if (reduced) {
-  gsap.set(revealed, { opacity: 1, y: 0 });
-} else {
-  $$("[data-reveal], [data-reveal-group]").forEach((el) => {
+/* ---- arrival ----
+   Only blocks that start below the fold are hidden, and only here: the first
+   screen paints straight from the HTML, so LCP never waits on this script. */
+const below = (el) => el.getBoundingClientRect().top > innerHeight;
+if (!reduced) {
+  $$("[data-reveal], [data-reveal-group]").filter(below).forEach((el) => {
     const group = el.hasAttribute("data-reveal-group");
     const targets = group ? Array.from(el.children) : [el];
     gsap.fromTo(targets, { opacity: 0, y: 18 }, {
@@ -25,14 +25,6 @@ if (reduced) {
       scrollTrigger: { trigger: el, start: "top 88%", once: true },
     });
   });
-}
-
-/* ---- hero title: each line out of its own mask ---- */
-const hero = $(".hero-title");
-if (hero) {
-  const rows = $$(".line", hero);
-  gsap.set(rows, { opacity: 1 });
-  if (!reduced) gsap.from($$(".line > span", hero), { yPercent: 112, duration: .95, ease: "power4.out", stagger: .075 });
 }
 
 /* ---- the plate follows the pointer by a few pixels ---- */

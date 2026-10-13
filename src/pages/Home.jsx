@@ -50,7 +50,7 @@ export default function Home() {
       <section className="hero" data-section="Overview">
         <div className="hero-grid">
         <div>
-        <Reveal><span className="eyebrow">Long chat extension · Chrome and Edge desktop</span></Reveal>
+        <Reveal><span className="eyebrow">Tvara · long chat extension for Chrome and Edge</span></Reveal>
         <HeroTitle lines={["Long AI chats,", "fast again."]} />
         <Reveal className="lede" as="p">
           Tvara keeps long ChatGPT, Claude and Gemini conversations responsive, lets you jump to any

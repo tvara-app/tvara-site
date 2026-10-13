@@ -5,7 +5,10 @@
    dateModified in the schema, so it must not be bumped by a rebuild.
    `faq` is rendered under the article and becomes its FAQPage schema: phrase each
    question the way people type it, and keep each answer true on its own.
-   `terms` (glossary only) renders as a definition list and a DefinedTermSet. */
+   `terms` (glossary only) renders as a definition list and a DefinedTermSet.
+   `sources` are the primary pages an article's claims rest on: the companies'
+   own help pages and the web platform docs, never another blog. They render
+   under the article and become its schema citation. */
 import slow from "./content/answers/why-long-ai-chats-get-slow.html?raw";
 import find from "./content/answers/search-old-ai-conversations.html?raw";
 import out from "./content/answers/export-ai-chat-history.html?raw";
@@ -30,12 +33,35 @@ import full from "./content/answers/conversation-too-long-context-limit.html?raw
 import words from "./content/answers/ai-chat-glossary.html?raw";
 import claude from "./content/answers/claude-usage-limits.html?raw";
 import one from "./content/answers/export-chatgpt-conversation.html?raw";
+import claudeOut from "./content/answers/export-claude-conversation.html?raw";
+import geminiOut from "./content/answers/export-gemini-conversation.html?raw";
+import geminiCap from "./content/answers/gemini-usage-limits.html?raw";
+
+const SRC = {
+  chatgptExport: { name: "OpenAI Help: Exporting your ChatGPT history and data", url: "https://help.openai.com/en/articles/7260999-how-do-i-export-my-chatgpt-history-and-data" },
+  chatgptData: { name: "OpenAI Help: Data controls in ChatGPT", url: "https://help.openai.com/en/articles/7730893-data-controls-faq" },
+  claudeExport: { name: "Claude Help Center: Export your Claude data", url: "https://support.claude.com/en/articles/9450526-export-your-claude-data" },
+  claudeContext: { name: "Claude Help Center: How large is the context window on paid Claude plans?", url: "https://support.claude.com/en/articles/8606394-how-large-is-the-context-window-on-paid-claude-plans" },
+  claudeUsage: { name: "Claude Help Center: Usage limit best practices", url: "https://support.claude.com/en/articles/9797557-usage-limit-best-practices" },
+  claudeWindows: { name: "Claude Platform Docs: Context windows", url: "https://platform.claude.com/docs/en/build-with-claude/context-windows" },
+  geminiExport: { name: "Gemini Apps Help: Export responses from Gemini Apps", url: "https://support.google.com/gemini/answer/14184041" },
+  geminiActivity: { name: "Gemini Apps Help: Manage and delete your activity in Gemini Apps", url: "https://support.google.com/gemini/answer/13278892" },
+  geminiLimits: { name: "Gemini Apps Help: Gemini Apps limits and upgrades for Google AI subscribers", url: "https://support.google.com/gemini/answer/16275805" },
+  takeout: { name: "Google Account Help: How to download your Google data", url: "https://support.google.com/accounts/answer/3024190" },
+  contentVisibility: { name: "web.dev: content-visibility, the CSS property that boosts rendering performance", url: "https://web.dev/articles/content-visibility" },
+  mdnContentVisibility: { name: "MDN: content-visibility", url: "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/content-visibility" },
+  domSize: { name: "Chrome for Developers: Avoid an excessive DOM size", url: "https://developer.chrome.com/docs/lighthouse/performance/dom-size" },
+  domInteractivity: { name: "web.dev: How large DOM sizes affect interactivity", url: "https://web.dev/articles/dom-size-and-interactivity" },
+  extensionStorage: { name: "Chrome for Developers: Extension storage and cookies", url: "https://developer.chrome.com/docs/extensions/develop/concepts/storage-and-cookies" },
+  storageQuotas: { name: "MDN: Storage quotas and eviction criteria", url: "https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria" },
+};
 
 export const ANSWERS = [
   {
-    slug: "answers/long-chat-toolkit", html: kit, updated: "2026-09-29",
+    slug: "answers/long-chat-toolkit", html: kit, updated: "2026-10-13",
+    sources: [SRC.domSize, SRC.contentVisibility, SRC.claudeContext, SRC.claudeUsage],
     crumb: "Long chat toolkit",
-    title: "Long AI chat toolkit: lag, navigation, search, context, limits · Tvara",
+    title: "Long chat toolkit: fix lag, find messages, keep context · Tvara",
     desc: "Long AI chats fail in five distinct ways: speed, navigation, search, lost context and invisible limits. What fixes each one, with and without extra tools.",
     faq: [
       { q: "What is the best way to manage a very long ChatGPT or Claude conversation?",
@@ -48,6 +74,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/why-long-ai-chats-get-slow", html: slow, updated: "2026-09-29",
+    sources: [SRC.domSize, SRC.domInteractivity, SRC.contentVisibility, SRC.mdnContentVisibility],
     crumb: "Why long chats get slow",
     title: "Why long ChatGPT and Claude chats get slow, and the fix · Tvara",
     desc: "A long ChatGPT or Claude conversation lags because the page holds tens of thousands of elements, not because the model slowed down. What helps, in order, and what does nothing.",
@@ -62,6 +89,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/search-old-ai-conversations", html: find, updated: "2026-09-29",
+    sources: [SRC.chatgptExport, SRC.geminiActivity, SRC.extensionStorage],
     crumb: "Find an old chat",
     title: "How to search old ChatGPT, Claude and Gemini conversations · Tvara",
     desc: "Ctrl+F fails on long chats because the page unloads its own history, and platform search is title-first. Four methods that work, and why a local archive solves it properly.",
@@ -76,6 +104,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/export-ai-chat-history", html: out, updated: "2026-09-29",
+    sources: [SRC.chatgptExport, SRC.claudeExport, SRC.takeout, SRC.geminiExport],
     crumb: "Export your history",
     title: "How to export ChatGPT, Claude and Gemini chat history · Tvara",
     desc: "Official account exports are slow snapshots in a shape built for machines. What a readable export looks like, why backup is a different job, and how to get both.",
@@ -89,7 +118,8 @@ export const ANSWERS = [
     ],
   },
   {
-    slug: "answers/check-ai-usage-limits", html: limits, updated: "2026-09-29",
+    slug: "answers/check-ai-usage-limits", html: limits, updated: "2026-10-13",
+    sources: [SRC.claudeUsage, SRC.geminiLimits],
     crumb: "See your usage limit",
     title: "How much of your ChatGPT, Claude or Gemini limit is left · Tvara",
     desc: "Why assistants hide the counter, what they publish anyway, how to plan around a rolling window, and why an invented number is worse than none.",
@@ -97,13 +127,14 @@ export const ANSWERS = [
       { q: "How do I check how much of my Claude usage is left?",
         a: "Open the usage page in Claude's settings. It shows how much of your five-hour session and your weekly limit you have used, and when each one resets." },
       { q: "Where can I see my Gemini usage?",
-        a: "Gemini has a usage page at gemini.google.com/usage." },
+        a: "In Gemini's settings, which show how much of the five-hour window and the weekly limit you have used. Tvara shows the same figures, with reset times, next to the chat." },
       { q: "Does ChatGPT show how many messages I have left?",
         a: "Mostly not. ChatGPT usually tells you when you have reached a limit and when it resets, rather than how close you are." },
     ],
   },
   {
     slug: "answers/recover-deleted-ai-chat", html: gone, updated: "2026-09-29",
+    sources: [SRC.chatgptData, SRC.geminiActivity],
     crumb: "Recover a deleted chat",
     title: "Can you recover a deleted AI conversation? · Tvara",
     desc: "Usually not, and not for long. What deletion really does, the three things worth trying in the first hour, and the only fix that works before it happens.",
@@ -118,6 +149,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/why-ai-forgets-conversation", html: forget, updated: "2026-09-29",
+    sources: [SRC.claudeWindows, SRC.claudeContext],
     crumb: "Why the AI forgets",
     title: "Why the AI forgets what you told it earlier · Tvara",
     desc: "A model has no memory between messages — the whole chat is re-sent each time, and what does not fit the context window is dropped. Why a bigger window does not fix it, and what to do instead.",
@@ -132,6 +164,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/continue-conversation-in-new-chat", html: carry, updated: "2026-09-29",
+    sources: [SRC.claudeContext, SRC.claudeUsage],
     crumb: "Continue in a new chat",
     title: "How to continue a long conversation in a new chat · Tvara",
     desc: "A new chat does not need the transcript — it needs the goal, the decisions, the current state and the next question. A handover format that works, and the prompt that writes it for you.",
@@ -156,6 +189,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/is-ai-chat-history-private", html: priv, updated: "2026-09-29",
+    sources: [SRC.chatgptData, SRC.geminiActivity, SRC.extensionStorage],
     crumb: "Is your history private?",
     title: "Is your AI chat history private? · Tvara",
     desc: "Where your conversations are stored, whether they train models, who can read them, what deletion really does, and how to judge what an extension adds to the picture.",
@@ -170,6 +204,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/choosing-an-ai-chat-extension", html: pick, updated: "2026-09-29",
+    sources: [SRC.extensionStorage, SRC.contentVisibility],
     crumb: "Judging an extension",
     title: "Choosing a ChatGPT or Claude extension: six tests · Tvara",
     desc: "Six things that separate these tools: what they ask to read, whether your chats leave your machine, how they fail when a site redesigns, and whether they delete messages to look fast.",
@@ -194,6 +229,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/ai-chat-freezes-browser", html: crash, updated: "2026-09-29",
+    sources: [SRC.domSize, SRC.domInteractivity],
     crumb: "When the tab freezes",
     title: "Why a long ChatGPT or Claude chat freezes your browser tab · Tvara",
     desc: "A long conversation full of code and images can exhaust a tab's memory budget. What pushes it over, how to get out of it without losing unsent text, and how to stop it recurring.",
@@ -208,6 +244,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/how-many-messages-in-one-chat", html: howmany, updated: "2026-09-29",
+    sources: [SRC.claudeContext, SRC.claudeWindows, SRC.geminiLimits],
     crumb: "How long can a chat be?",
     title: "How many messages can one AI conversation hold? · Tvara",
     desc: "Two different limits get confused constantly: what the model can still see, and what the browser tab can still render. Why there is no fixed number, and which one you hit first.",
@@ -220,6 +257,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/save-notes-from-ai-chats", html: notes, updated: "2026-09-29",
+    sources: [SRC.geminiExport, SRC.chatgptExport],
     crumb: "Keep the good parts",
     title: "How to keep the good parts of your AI conversations · Tvara",
     desc: "Four approaches in increasing order of effort, and the silent ways copy-paste loses maths, code language, diagrams and images out of a chat answer.",
@@ -232,6 +270,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/automatic-backup-ai-chats", html: backup, updated: "2026-09-29",
+    sources: [SRC.extensionStorage, SRC.storageQuotas, SRC.chatgptExport],
     crumb: "Automatic backups",
     title: "How to back up your AI conversations automatically · Tvara",
     desc: "Account exports are manual snapshots, not a backup strategy. What an automatic backup has to get right — unattended, encrypted, restorable — and how to roll your own if you prefer.",
@@ -256,6 +295,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/ai-chat-wont-load", html: stuck, updated: "2026-09-29",
+    sources: [SRC.domSize, SRC.domInteractivity],
     crumb: "When a chat will not load",
     title: "When an AI conversation will not load · Tvara",
     desc: "Three questions that separate almost every cause — a new chat, a private window, another device — then the five common culprits and what to do if it is genuinely gone.",
@@ -268,6 +308,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/conversation-too-long-context-limit", html: full, updated: "2026-09-29",
+    sources: [SRC.claudeWindows, SRC.claudeContext],
     crumb: "Conversation too long",
     title: "Conversation too long? The context limit, and what to do · Tvara",
     desc: "When ChatGPT or Claude says a chat has reached its maximum length, the context window is full. What fills it, and how to continue in a new chat without losing the thread.",
@@ -306,6 +347,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/ai-chat-glossary", html: words, updated: "2026-09-29",
+    sources: [SRC.claudeWindows, SRC.contentVisibility, SRC.extensionStorage, SRC.claudeUsage, SRC.geminiLimits],
     crumb: "Glossary",
     title: "Long AI chat glossary: context window, tokens, memory, limits · Tvara",
     desc: "Plain definitions of the words behind long AI chats: context window, tokens, context limit, context management, compaction, memory, handover, usage limits and more.",
@@ -352,6 +394,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/claude-usage-limits", html: claude, updated: "2026-09-29",
+    sources: [SRC.claudeUsage, SRC.claudeContext],
     crumb: "Claude usage limits",
     title: "Claude usage limits: the five-hour session and weekly cap · Tvara",
     desc: "How Claude's five-hour session limit and weekly limit work, where to see what is left, why long chats use it up faster, and how to make it last.",
@@ -366,6 +409,7 @@ export const ANSWERS = [
   },
   {
     slug: "answers/export-chatgpt-conversation", html: one, updated: "2026-09-29",
+    sources: [SRC.chatgptExport],
     crumb: "Export one ChatGPT chat",
     title: "Export a ChatGPT conversation to Markdown, PDF or JSON · Tvara",
     desc: "ChatGPT's export covers your whole account and arrives by email. How to save one conversation as Markdown, PDF or JSON, and what each method loses.",
@@ -376,6 +420,51 @@ export const ANSWERS = [
         a: "Press Ctrl+P or Cmd+P and choose Save as PDF. It works for short chats; long ones print poorly. Exporting Markdown and converting that to PDF gives a cleaner result." },
       { q: "How do I export ChatGPT to Markdown?",
         a: "Tvara's minimap toolbar saves the open ChatGPT conversation as Markdown in one click, with headings, code fences and timestamps. It is free on ChatGPT." },
+    ],
+  },
+  {
+    slug: "answers/export-claude-conversation", html: claudeOut, updated: "2026-10-13",
+    sources: [SRC.claudeExport],
+    crumb: "Export one Claude chat",
+    title: "Export a Claude conversation to Markdown, PDF or JSON · Tvara",
+    desc: "Claude's export covers your whole account and its link expires in 24 hours. How to save one Claude conversation as Markdown, PDF or JSON, and what each method keeps.",
+    faq: [
+      { q: "How do I export a Claude conversation?",
+        a: "For your whole history, open Settings → Privacy → Export data on the web or in Claude Desktop; a download link arrives by email and expires 24 hours later. For one conversation, copy it, print the page to PDF, or use an extension that saves it as Markdown or JSON." },
+      { q: "Can I export Claude chats from the mobile app?",
+        a: "No. Claude's data export runs only from the web app or Claude Desktop, not from the iOS or Android app." },
+      { q: "How do I save a Claude chat as Markdown?",
+        a: "Tvara's minimap toolbar saves the open Claude conversation as Markdown or JSON in one click, with code blocks and timestamps. On Claude it is part of Pro, with a seven-day free trial." },
+    ],
+  },
+  {
+    slug: "answers/export-gemini-conversation", html: geminiOut, updated: "2026-10-13",
+    sources: [SRC.geminiExport, SRC.geminiActivity, SRC.takeout],
+    crumb: "Export one Gemini chat",
+    title: "Export a Gemini conversation to Docs, Markdown or PDF · Tvara",
+    desc: "Gemini exports one response at a time to Docs, Gmail or Sheets, and your history through Google Takeout. How to save a whole Gemini conversation as one file.",
+    faq: [
+      { q: "How do I export a Gemini chat to Google Docs?",
+        a: "Below a response, click Share & export, then Export to Docs. It saves that one response, not the whole conversation, as a new doc in Google Drive." },
+      { q: "Can I download my whole Gemini chat history?",
+        a: "Yes, through Google Takeout, which exports your Gemini Apps activity with the rest of your Google data. It only includes what Gemini Apps Activity kept: if that setting was off, those chats were not saved." },
+      { q: "How do I save a whole Gemini conversation as one file?",
+        a: "Print it to PDF for a short chat, or use an extension. Tvara saves the open Gemini conversation, both sides, as Markdown or JSON in one click; on Gemini it is part of Pro, with a seven-day free trial." },
+    ],
+  },
+  {
+    slug: "answers/gemini-usage-limits", html: geminiCap, updated: "2026-10-13",
+    sources: [SRC.geminiLimits],
+    crumb: "Gemini usage limits",
+    title: "Gemini usage limits: the five-hour window and weekly limit · Tvara",
+    desc: "Gemini meters use by compute, refreshing every five hours until a weekly limit. What spends it, why long chats use it faster, and how to see what is left.",
+    faq: [
+      { q: "How many prompts can I send to Gemini per day?",
+        a: "There is no fixed number. Gemini's limits are compute-based: they factor in prompt complexity, the models and features you use, and the length of your chat. The limit refreshes every five hours until you reach a weekly limit." },
+      { q: "When does the Gemini usage limit reset?",
+        a: "Every five hours, until you reach the weekly limit. Once the week's limit is used, the five-hour refresh no longer helps until the week resets." },
+      { q: "Why does Gemini hit the limit faster in long chats?",
+        a: "Chat length is one of the factors Google names. Each new message sends the conversation back to the model, so a message late in a long chat costs more than the same message in a new one." },
     ],
   },
 ];
