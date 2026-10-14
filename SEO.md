@@ -91,9 +91,12 @@ The store listing ranks in Google on its own and is often the first result for a
 
 - Never name ChatGPT, Claude, Gemini or other providers in the store title, summary or screenshots. The listing was rejected once for this. Describe the job instead: long AI chats, speed, search, backup.
 - Title and short description carry the phrases people search: "Long AI Chat Toolkit" and "long chat toolkit". The copy lives in `~/tvara/store/listing.md` and the manifest; changing them needs a new package.
+- The long description follows the same shape as an answer page: what it is, what it does (free and Pro marked), when it helps in the words people use, how to start, then a link to `/answers`.
 - Use all five screenshots, each with a caption that states one benefit. Add a short demo video.
-- Ask satisfied users for reviews. Rating count and recency affect store ranking.
-- Set the listing's website field to the site. The site already links to the listing from every page.
+- Ratings: the popup asks once, quietly, after 10+ archived chats and 3+ days, never again after a rating or a second "Not now" (`rateAskDue` in `~/tvara/lib/product.js`). Store installs only. Never offer anything for a rating.
+- The manifest's `homepage_url` points at the site. In the dashboard, also set the Official URL to the site; it must be a Search Console property on the same Google account as the developer account.
+- Ship updates regularly. The store and Google both treat a recently updated item as maintained.
+- Category: Productivity, then Tools, is the closest fit. Change it only together with the copy, so the listing never says one thing and is filed as another.
 
 ## Off-page checklist
 
