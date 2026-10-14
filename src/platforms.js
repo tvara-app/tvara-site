@@ -15,7 +15,7 @@ export const PLATFORMS = [
   {
     slug: "chatgpt-extension", name: "ChatGPT", html: chatgpt, updated: "2026-09-17",
     title: "Long Chat Extension for ChatGPT: Fix Lag, Search, Backup · Tvara",
-    desc: "A Chrome extension that stops long ChatGPT chats lagging, adds a minimap, outline and search, shows real send times, and saves your ChatGPT history locally.",
+    desc: "Chrome extension for long ChatGPT chats: stops the lag, adds a minimap, outline and search, shows real send times, and saves your ChatGPT history locally.",
     related: ["answers/why-long-ai-chats-get-slow", "answers/export-chatgpt-conversation", "answers/see-when-ai-message-was-sent", "answers/search-old-ai-conversations"],
     faq: [
       { q: "Does Tvara delete ChatGPT messages to make a chat faster?",
@@ -28,9 +28,9 @@ export const PLATFORMS = [
   },
   {
     slug: "claude-extension", name: "Claude", html: claude, updated: "2026-09-17",
-    title: "Long Chat Extension for Claude: Speed, Usage Limits, Backup · Tvara",
-    desc: "A Chrome extension for long Claude chats: less lag, a minimap to jump between messages, your five-hour and weekly usage limits, and your Claude history saved locally.",
-    related: ["answers/claude-usage-limits", "answers/export-claude-conversation", "answers/conversation-too-long-context-limit", "answers/continue-conversation-in-new-chat"],
+    title: "Long Chat Extension for Claude: Speed, Limits, Backup · Tvara",
+    desc: "Chrome extension for long Claude chats: less lag, a minimap to jump between messages, your five-hour and weekly limits, and Claude history saved locally.",
+    related: ["answers/claude-usage-limits", "answers/claude-conversation-too-long", "answers/export-claude-conversation", "answers/conversation-too-long-context-limit", "answers/continue-conversation-in-new-chat"],
     faq: [
       { q: "Can Tvara show how much of my Claude limit is left?",
         a: "Yes. It shows your five-hour session limit and your weekly limit from Claude's own figures, with the time each resets, and leads with the one that will stop you soonest." },
@@ -43,7 +43,7 @@ export const PLATFORMS = [
   {
     slug: "gemini-extension", name: "Gemini", html: gemini, updated: "2026-09-17",
     title: "Long Chat Extension for Gemini: Speed, Search, Backup · Tvara",
-    desc: "A Chrome extension for long Gemini chats: less lag, a minimap, the usage Gemini reports, and your Gemini history saved locally from every Google account you use.",
+    desc: "Chrome extension for long Gemini chats: less lag, a minimap, the usage Gemini reports, and your Gemini history saved locally from every Google account.",
     related: ["answers/gemini-usage-limits", "answers/export-gemini-conversation", "answers/using-multiple-ai-assistants"],
     faq: [
       { q: "I use Gemini with two Google accounts. Are both archived?",
@@ -55,7 +55,7 @@ export const PLATFORMS = [
   {
     slug: "deepseek-extension", name: "DeepSeek", html: deepseek, updated: "2026-09-17",
     title: "Long Chat Extension for DeepSeek: Speed, Search, Backup · Tvara",
-    desc: "A Chrome extension for long DeepSeek chats: less lag, a minimap, outline and search, and a local copy of your DeepSeek history that keeps answers apart from the reasoning.",
+    desc: "Chrome extension for long DeepSeek chats: less lag, a minimap, outline and search, and a local copy of your history that keeps answers apart from reasoning.",
     related: ["answers/ai-chat-freezes-browser", "answers/read-long-ai-answers", "answers/automatic-backup-ai-chats"],
     faq: [
       { q: "Does Tvara show a DeepSeek usage limit?",
@@ -77,7 +77,7 @@ export const PLATFORMS = [
   {
     slug: "perplexity-extension", name: "Perplexity", html: perplexity, updated: "2026-09-17",
     title: "Long Chat Extension for Perplexity: Speed, Search, Backup · Tvara",
-    desc: "A Chrome extension for long Perplexity threads: less lag, a minimap of every question and answer, Pro searches left, and your threads saved on your computer.",
+    desc: "Chrome extension for long Perplexity threads: less lag, a minimap of every question and answer, Pro searches left, and your threads saved on your computer.",
     related: ["answers/search-old-ai-conversations", "answers/organize-ai-conversations", "answers/export-ai-chat-history"],
     faq: [
       { q: "Can Tvara show how many Perplexity Pro searches I have left?",

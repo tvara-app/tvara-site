@@ -13,7 +13,7 @@ export default function Answers() {
       <Reveal className="grid" stagger>
         {ANSWERS.map((a) => (
           <SpotlightCard key={a.slug}>
-            <h3><a href={"/" + a.slug}>{a.crumb}</a></h3>
+            <h2 className="h3"><a href={"/" + a.slug}>{a.crumb}</a></h2>
             <p>{a.desc}</p>
           </SpotlightCard>
         ))}

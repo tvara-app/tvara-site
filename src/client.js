@@ -424,13 +424,14 @@ if (sim) {
     mounted = true;
     const before = chat.scrollHeight;
     D.older.forEach((m) => {
-      const el = document.createElement("article");
+      const el = document.createElement("div");
       el.className = "sim-msg " + m.r;
       el.dataset.h = m.h || "";
       const p = document.createElement("p");
       p.dataset.simText = "";
       p.textContent = m.x;
-      const foot = document.createElement("footer");
+      const foot = document.createElement("div");
+      foot.className = "sim-meta";
       foot.innerHTML = '<span class="sim-time"></span><button type="button" class="sim-star" data-sim-star aria-pressed="false" aria-label="Star this message"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l2.3 4.9 5.2.7-3.8 3.6 1 5.2-4.7-2.6-4.7 2.6 1-5.2L4.5 9.6l5.2-.7z"/></svg></button>';
       $(".sim-time", foot).textContent = m.t;
       el.append(p, foot);

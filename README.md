@@ -41,6 +41,9 @@ and the script. Use `npm run preview` and reload.
 - `src/answers.js` — the answer library: each article's title, FAQ, sources,
   glossary terms and `updated` date. `src/content/answers/*.html` holds the
   article bodies.
+- `src/shots.js` — the screenshots on `/features`: file, alt text, caption. It
+  also feeds SoftwareApplication `screenshot` and the image sitemap. Files are
+  WebP in `static/shots/`, each at 640 and 1280 wide.
 - `src/platforms.js` — one page per supported AI site, with its related
   answers. Bodies in `src/content/platforms/*.html`.
 - `src/entry-server.jsx` — renders a route and builds its JSON-LD:
@@ -58,8 +61,8 @@ and the script. Use `npm run preview` and reload.
 - `src/styles.css` — the extension's own tokens at page scale: the popup's warm
   plate, its hairlines, its type. Every animation sits behind
   `prefers-reduced-motion`.
-- `static/` — copied into `dist/` verbatim: icons, logo, social card, the
-  IndexNow key and `_headers`.
+- `static/` — copied into `dist/` verbatim: icons, logo, social card,
+  screenshots, the IndexNow key and `_headers`.
 - `public/` — Search Console verification files.
 - `tools/` — `preflight.mjs` (refuses a deploy whose canonical host does not
   answer), `indexnow.mjs`, `attach-domain.mjs`.

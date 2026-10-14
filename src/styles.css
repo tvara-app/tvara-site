@@ -216,7 +216,9 @@ h1:not(.hero-title) { font-size: clamp(27px, 3.5vw, 41px); font-weight: 500; let
   max-width: 15ch;
 }
 h2 { font-size: clamp(25px, 3.2vw, 38px); font-weight: 500; letter-spacing: -.03em; line-height: 1.08; max-width: 20ch; }
-h3 { font-size: 19px; font-weight: 500; letter-spacing: -.022em; }
+h3, h2.h3 { font-size: 19px; font-weight: 500; letter-spacing: -.022em; }
+/* section-level heading with card-title size: keeps the outline h1 → h2 without a skip */
+h2.h3 { line-height: inherit; max-width: none; }
 p { max-width: 68ch; }
 strong { font-weight: 600; color: var(--ink); }
 em { font-style: normal; color: var(--ink-dim); }
@@ -313,7 +315,7 @@ kbd {
 }
 .card:hover { border-color: var(--line); background: var(--glass-hi); }
 .card:hover::before { opacity: 1; }
-.card h3 + p { margin-top: 10px; }
+.card h3 + p, .card .h3 + p { margin-top: 10px; }
 .card p { color: var(--ink-dim); font-size: 15px; }
 .card p + p { margin-top: 10px; }
 
@@ -399,9 +401,9 @@ kbd {
 .sim-msg.ai p { color: rgb(255 255 255 / .7); }
 .sim-code { margin: 2px 0 0; padding: 9px 11px; border: 1px solid rgb(255 255 255 / .08); border-radius: 8px; background: rgb(0 0 0 / .3); color: rgb(255 200 214 / .82); font: 400 11px/1.55 var(--mono); white-space: pre-wrap; }
 
-.sim-msg footer { display: flex; align-items: center; gap: 7px; height: 13px; opacity: 0; transition: opacity .2s var(--ease); }
-.sim-msg.you footer { justify-content: flex-end; }
-.sim-msg:hover footer, .sim-msg:focus-within footer, .sim-msg.starred footer { opacity: 1; }
+.sim-msg .sim-meta { display: flex; align-items: center; gap: 7px; height: 13px; opacity: 0; transition: opacity .2s var(--ease); }
+.sim-msg.you .sim-meta { justify-content: flex-end; }
+.sim-msg:hover .sim-meta, .sim-msg:focus-within .sim-meta, .sim-msg.starred .sim-meta { opacity: 1; }
 .sim-time { color: rgb(255 255 255 / .34); font: 400 9.5px/1 var(--mono); }
 .sim-star { display: grid; place-items: center; width: 18px; height: 18px; padding: 0; border: 0; border-radius: 6px; background: none; color: rgb(255 255 255 / .34); cursor: pointer; transition: color .2s var(--ease), background .2s var(--ease); }
 .sim-star:hover { background: rgb(255 255 255 / .1); color: #fff; }
@@ -412,7 +414,7 @@ kbd {
 
 /* Windowed messages keep their box and lose their paint — the extension's own
    skeleton, not a disappearance. */
-.sim-msg.asleep > p, .sim-msg.asleep > pre, .sim-msg.asleep > footer { visibility: hidden; }
+.sim-msg.asleep > p, .sim-msg.asleep > pre, .sim-msg.asleep > .sim-meta { visibility: hidden; }
 .sim-msg.asleep { background: rgba(127, 127, 127, .055); border-radius: 12px; box-shadow: none; }
 .sim-msg.flash { background: rgba(255, 93, 138, .12); border-radius: 12px; }
 .sim-msg mark { padding: 0 2px; border-radius: 3px; background: rgba(255, 93, 138, .28); color: #fff; }
@@ -561,6 +563,13 @@ kbd {
 }
 
 /* ---------- callout ---------- */
+
+/* ---------- screenshots ---------- */
+.shots { display: grid; gap: 26px 22px; margin-top: 40px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.shots figure { margin: 0; }
+.shots img { display: block; width: 100%; height: auto; border: 1px solid var(--line-soft); border-radius: 12px; }
+.shots figcaption { margin-top: 10px; color: var(--ink-faint); font-size: 14px; }
+@media (max-width: 860px) { .shots { grid-template-columns: 1fr; } }
 
 .callout {
   margin-top: var(--gap-section);

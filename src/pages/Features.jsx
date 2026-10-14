@@ -1,4 +1,5 @@
 import Reveal from "../components/Reveal.jsx";
+import { SHOTS, SHOT_W, SHOT_H } from "../shots.js";
 
 const FEATURES = [
   {
@@ -133,7 +134,7 @@ export default function Features() {
           {FEATURES.map((f) => (
             <Reveal className="feature" key={f.h}>
               <div>
-                <h3>{f.h}{f.pro && <span className="tag">Pro</span>}</h3>
+                <h2 className="h3">{f.h}{f.pro && <span className="tag">Pro</span>}</h2>
                 {f.body.map((t, i) => <p key={i}>{t}</p>)}
               </div>
               <dl>
@@ -142,6 +143,26 @@ export default function Features() {
             </Reveal>
           ))}
         </div>
+      </section>
+
+      <section data-section="Screenshots">
+        <Reveal className="section-head">
+          <h2>What it looks like</h2>
+          <p>Screenshots from the extension, on a demo conversation of 1,500 messages.</p>
+        </Reveal>
+        <Reveal className="shots" stagger>
+          {SHOTS.map((s) => (
+            <figure key={s.file}>
+              <img
+                src={`/shots/${s.file}-640.webp`}
+                srcSet={`/shots/${s.file}-640.webp 640w, /shots/${s.file}.webp 1280w`}
+                sizes="(max-width: 860px) 100vw, 50vw"
+                width={SHOT_W} height={SHOT_H} alt={s.alt} loading="lazy" decoding="async"
+              />
+              <figcaption>{s.caption}</figcaption>
+            </figure>
+          ))}
+        </Reveal>
       </section>
 
       <section data-section="Where your chats go">

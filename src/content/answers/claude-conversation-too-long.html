@@ -1,0 +1,28 @@
+<h1>Claude says the conversation is too long: the fixes that work</h1>
+
+<p>Short answer: the chat has filled Claude's context window. On a paid plan, turn on code execution in Settings, then Capabilities, and Claude summarises earlier messages automatically instead of stopping. Otherwise, ask for a handover summary before the limit and continue in a new chat.</p>
+
+<p>The message means Claude can no longer read the whole conversation at once. Every new message sends the chat back to the model, and a long one, full of files and pasted code, eventually outgrows the window. These are the fixes people trade in Claude communities, checked against Anthropic's own documentation.</p>
+
+<h2>The fixes, most effective first</h2>
+
+<ol>
+<li><strong>Turn on automatic context management.</strong> On paid plans with code execution enabled, Claude summarises earlier messages to make room and keeps the full history so it can still refer to it. Anthropic says this lets conversations continue indefinitely in most cases. Switch on Code execution and file creation under Settings, then Capabilities; on Team and Enterprise plans an owner controls it. The trade-off: long chats that trigger it use more of your usage limit.</li>
+<li><strong>Ask for a handover before the wall.</strong> The most common workaround. Ask Claude to summarise the goal, the decisions and the open questions, then paste that into a new chat. Do it while answers are still sharp: at the limit there may be no room left to write the summary. <a href="/answers/continue-conversation-in-new-chat">A handover format that works</a>.</li>
+<li><strong>Keep a running checkpoint.</strong> A variation shared in Claude communities: every so often, ask Claude to update a short notes file of what has been decided. When a chat ends, the next one starts from that file, and several new chats can start from the same one.</li>
+<li><strong>Move reference material into a Project.</strong> Projects use retrieval: Claude loads only the relevant parts of project files into the context window, so documents you reuse do not fill every chat.</li>
+<li><strong>Split a huge first message.</strong> Anthropic notes that a very large first message can still hit the limit. Send only the part you need, or put the document in a Project.</li>
+</ol>
+
+<h2>What does not help</h2>
+
+<ul>
+<li><strong>Waiting for a reset.</strong> This limit is the length of the chat, not your usage allowance. A new five-hour session does not shorten the conversation. <a href="/answers/claude-usage-limits">Claude's usage limits</a> are a separate limit.</li>
+<li><strong>Pasting the whole transcript into a new chat.</strong> It fills the new window with the same problem.</li>
+</ul>
+
+<h2>How Tvara helps</h2>
+
+<p>Continue in a new chat, on the minimap toolbar, opens a fresh Claude conversation with your original ask, your starred messages and the last few turns already in the prompt box. They are quoted, never summarised, and nothing is sent until you press send. Context Bridge adds passages from your past chats on any supported site. Both are part of Pro, $1 once with a seven-day free trial.</p>
+
+<p>Tvara also shows your five-hour and weekly Claude usage next to the chat, free, so the extra cost of a long chat is visible before it stops you. <a href="/claude-extension">Tvara on Claude</a> · <a href="/answers/conversation-too-long-context-limit">The context limit on every assistant</a> · <a href="/answers/why-ai-forgets-conversation">Why the AI forgets</a></p>

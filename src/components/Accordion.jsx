@@ -8,12 +8,12 @@ export default function Accordion({ items }) {
         const open = i === 0;
         return (
           <div className="qa-item" key={it.q} data-open={String(open)}>
-            <h3>
+            <h2 className="h3">
               <button type="button" className="qa-btn" aria-expanded={open} aria-controls={`qa-${i}`}>
                 {it.q}
                 <span className="qa-sign" aria-hidden="true" />
               </button>
-            </h3>
+            </h2>
             <div className="qa-panel" id={`qa-${i}`} role="region" {...(open ? {} : { inert: true })}>
               <div className="qa-inner"><div>{it.a}</div></div>
             </div>

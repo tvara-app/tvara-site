@@ -40,6 +40,19 @@
 
 <p>This is what the hosts themselves do — mount a window of messages and unload the rest. It works, which is why they do it, and it is also why searching your own conversation with <kbd>Ctrl+F</kbd> stops finding things: the text is genuinely not in the page.</p>
 
+<h3>Rule out an extension</h3>
+
+<p>Open the same chat in a private window, where extensions are off by default. If it is fast there and slow in your normal window, an extension is adding to the cost, and switching them off one at a time finds which.</p>
+
+<h2>Fixes you will see suggested in forums</h2>
+
+<ul>
+<li><strong>"Open it in another browser."</strong> It feels instantly faster, because the other browser loads a fresh page with fewer messages mounted. That is a reload by another name: the slowdown returns as you scroll back up.</li>
+<li><strong>"Use an extension that lazy-loads messages."</strong> It helps until you scroll up, when the older messages load again and the page is as heavy as before.</li>
+<li><strong>"Use a script that removes old messages from the page."</strong> It works, and it costs you the messages: they are no longer on the page, so you cannot read or find them without reloading.</li>
+<li><strong>"Wait for one answer to finish before sending the next."</strong> Reasonable. A streaming answer is the most expensive moment for a long page, so overlapping them makes the stutter worse.</li>
+</ul>
+
 <h2>What does not help</h2>
 
 <ul>

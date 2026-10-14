@@ -29,6 +29,11 @@ The code side is done (below). The remaining steps are yours, in this order:
 - Every article lists its primary sources (the AI companies' help pages, web.dev, MDN) under the text and as `citation` in its Article schema, and shows the date its text last changed with a byline linking to `/about`.
 - `/about` says what Tvara is, how it handles data and how the site is written, with AboutPage schema. Organization schema lists the store and the GitHub organisation in `sameAs`.
 - The first screen paints from the HTML: the arrival animation hides only blocks that start below the fold, so LCP never waits on JavaScript.
+- Hub and spokes: every article's byline links to the hub, `/answers/long-chat-toolkit`, and every article lists the rest. Every page is two clicks or fewer from `/`.
+- Entities: each Article names what it is `about` (the assistants in its title) and what it `mentions` (in its body), tied to Wikipedia with `sameAs`, so a vague query resolves to the right product.
+- Images: five real screenshots on `/features` (WebP, 640 and 1280 wide, lazy, fixed size so nothing shifts), each with alt text that says what it shows. The same list feeds SoftwareApplication `screenshot` and the image sitemap. One list, `src/shots.js`.
+- Heading outline: one `h1` per page and no skipped levels. Card and accordion titles are `h2` with the `h3` class for size, never a bold paragraph styled as a heading or a heading used for size.
+- Titles 63 characters or fewer, descriptions 70 to 160, with the page's main phrase first.
 
 ## Keyword map
 
@@ -39,17 +44,19 @@ One page per search intent. Before adding a page, check that the intent is not a
 | Brand | tvara, tvara extension, tvara chrome | `/`, `/features`, `/faq` |
 | Category | long chat extension, long chat toolkit, AI chat manager, chat handler, long conversation tool | `/`, `/answers/long-chat-toolkit`, `/answers/choosing-an-ai-chat-extension` |
 | Per assistant | ChatGPT extension, Claude extension, Gemini extension, DeepSeek, Grok, Perplexity extension | the six platform pages |
-| Speed | ChatGPT slow long chat, chat lagging, browser freezes, page unresponsive | `why-long-ai-chats-get-slow`, `ai-chat-freezes-browser`, `ai-chat-wont-load` |
+| Speed | ChatGPT slow long chat, chat lagging, browser freezes, page unresponsive, fix from forums | `why-long-ai-chats-get-slow` (with forum fixes checked), `ai-chat-freezes-browser`, `ai-chat-wont-load` |
 | Navigation | jump to message, chat outline, minimap, scroll long chat | `jump-to-message-in-long-chat`, `read-long-ai-answers` |
-| Search | search old ChatGPT chats, find a conversation | `search-old-ai-conversations`, `organize-ai-conversations` |
-| Context | context window, context handling, context management, AI forgets, conversation too long | `why-ai-forgets-conversation`, `conversation-too-long-context-limit`, `continue-conversation-in-new-chat`, `ai-chat-glossary` |
-| Limits | Claude usage limit, ChatGPT limit, message cap, rate limit reset | `claude-usage-limits`, `gemini-usage-limits`, `check-ai-usage-limits`, `how-many-messages-in-one-chat` |
+| Search | search old ChatGPT chats, find a conversation, ChatGPT search not finding chat | `search-old-ai-conversations`, `organize-ai-conversations` |
+| Context | context window, context handling, context management, AI forgets, conversation too long | `why-ai-forgets-conversation`, `conversation-too-long-context-limit`, `claude-conversation-too-long`, `continue-conversation-in-new-chat`, `ai-chat-glossary` |
+| Limits | Claude usage limit, Gemini limit after a few prompts, ChatGPT limit, message cap, rate limit reset | `claude-usage-limits`, `gemini-usage-limits`, `check-ai-usage-limits`, `how-many-messages-in-one-chat` |
 | Export and backup | export ChatGPT, Claude or Gemini chat, save as Markdown or PDF, back up AI chats | `export-chatgpt-conversation`, `export-claude-conversation`, `export-gemini-conversation`, `export-ai-chat-history`, `automatic-backup-ai-chats`, `save-notes-from-ai-chats` |
 | Recovery | recover deleted ChatGPT chat | `recover-deleted-ai-chat` |
 | Timestamps | when was a ChatGPT message sent | `see-when-ai-message-was-sent` |
 | Privacy | is AI chat history private | `is-ai-chat-history-private` |
 | Several assistants | use ChatGPT and Claude together | `using-multiple-ai-assistants` |
 | Definitions | what is a token, context window, compaction | `ai-chat-glossary` |
+
+Forum-style queries ("… reddit", "… not working", "… fix") are answered inside the page that owns the intent, as a section that checks each fix people suggest, not as a new page per phrasing. Near-duplicate pages for query variations are doorway pages under Google's spam policies. Reddit blocks most research crawlers, so never quote a thread you could not read.
 
 Gaps worth a page next: ChatGPT memory versus chat history (once OpenAI's memory settings stop changing), and a fair comparison of long chat extensions.
 

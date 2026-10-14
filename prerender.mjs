@@ -6,7 +6,7 @@ import { dirname } from "node:path";
 
 const OG = "/social-card.jpg";
 /* ORIGIN lives in src/routes.js, with the reason it has no env override. */
-const { renderBody, renderNotFound, schemaFor, ROUTES, STORE_URL, ORIGIN: SITE_URL } = await import("./dist-ssr/entry-server.js");
+const { renderBody, renderNotFound, schemaFor, ROUTES, STORE_URL, SHOTS, ORIGIN: SITE_URL } = await import("./dist-ssr/entry-server.js");
 
 /* The client build owns the asset hashes; take the tags it wrote rather than
    guessing filenames. */
@@ -45,11 +45,12 @@ ${route.answer ? `<meta property="article:modified_time" content="${route.answer
 <meta property="og:image" content="${SITE_URL}${OG}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Tvara — make long AI chats fast again" />
+<meta property="og:image:alt" content="Tvara, the long chat toolkit for AI conversations: fast long chats, a map of the whole thread, search and export" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${esc(route.title)}" />
 <meta name="twitter:description" content="${esc(route.desc)}" />
 <meta name="twitter:image" content="${SITE_URL}${OG}" />
+<meta name="twitter:image:alt" content="Tvara, the long chat toolkit for AI conversations: fast long chats, a map of the whole thread, search and export" />
 <link rel="icon" href="/favicon.ico" sizes="32x32" />
 <link rel="icon" href="/logo.png" type="image/png" sizes="128x128" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -91,9 +92,10 @@ writeFileSync("dist/robots.txt", [
    A noindex route is kept OUT — a sitemap is a request to index. */
 const LASTMOD = new Date().toISOString().slice(0, 10);
 writeFileSync("dist/sitemap.xml", ['<?xml version="1.0" encoding="UTF-8"?>',
-  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
   ...ROUTES.filter((r) => r.index !== false)
-    .map((r) => `  <url><loc>${SITE_URL}/${r.slug}</loc><lastmod>${(r.answer || r.platform)?.updated || LASTMOD}</lastmod></url>`),
+    .map((r) => `  <url><loc>${SITE_URL}/${r.slug}</loc><lastmod>${(r.answer || r.platform)?.updated || LASTMOD}</lastmod>${
+      r.slug === "features" ? SHOTS.map((s) => `<image:image><image:loc>${SITE_URL}/shots/${s.file}.webp</image:loc></image:image>`).join("") : ""}</url>`),
   "</urlset>", ""].join("\n"));
 
 /* llms.txt: the same map the navigation gives a person, for a model that was

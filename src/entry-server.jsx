@@ -18,6 +18,23 @@ import { ANSWERS } from "./answers.js";
 import Platform from "./pages/Platform.jsx";
 import { PLATFORMS } from "./platforms.js";
 import { STORE_URL } from "./routes.js";
+import { SHOTS, SHOT_W, SHOT_H } from "./shots.js";
+
+/* Entities an article can be about, tied to Wikipedia so a vague query
+   ("claude too long", "gemini limit") resolves to the right thing. Named in
+   the title: about. Named only in the body: mentions. */
+const WIKI = "https://en.wikipedia.org/wiki/";
+const ENTITIES = [
+  ["ChatGPT", "ChatGPT"], ["Claude", "Claude_(language_model)"], ["Gemini", "Gemini_(chatbot)"],
+  ["Perplexity", "Perplexity_AI"], ["DeepSeek", "DeepSeek_(chatbot)"], ["Grok", "Grok_(chatbot)"],
+  ["context window", "Context_window"], ["Markdown", "Markdown"],
+].map(([name, page]) => ({ name, re: new RegExp(`\\b${name}\\b`, name === name.toLowerCase() ? "i" : ""), thing: { "@type": "Thing", name, sameAs: WIKI + page } }));
+const CHATBOT = { "@type": "Thing", name: "AI chatbot", sameAs: WIKI + "Chatbot" };
+function entities(title, html) {
+  const about = ENTITIES.filter((e) => e.re.test(title));
+  const mentions = ENTITIES.filter((e) => !about.includes(e) && e.re.test(html.replace(/<[^>]+>/g, " ")));
+  return { about: about.length ? about.map((e) => e.thing) : [CHATBOT], mentions: mentions.map((e) => e.thing) };
+}
 
 const PAGES = {
   "/": Home, "/features": Features, "/pricing": Pricing, "/guide": Guide, "/faq": Faq,
@@ -66,11 +83,12 @@ export function schemaFor(route, siteUrl) {
     blocks.push({
       "@context": "https://schema.org", "@type": "SoftwareApplication",
       "@id": siteUrl + "/#app", name: "Tvara",
-      /* The Chrome Web Store listing name, so both pages resolve to one product. */
-      alternateName: "Tvara: Long AI Chat Speed, Search & Backup",
+      /* Chrome Web Store listing names, new and current, so both pages resolve to one product. */
+      alternateName: ["Tvara: Long AI Chat Toolkit – Speed, Search & Backup", "Tvara: Long AI Chat Speed, Search & Backup"],
       applicationCategory: "BrowserApplication", applicationSubCategory: "Productivity",
       operatingSystem: "Chrome and Edge desktop",
-      image: siteUrl + "/logo.png", screenshot: siteUrl + "/social-card.jpg",
+      image: siteUrl + "/logo.png",
+      screenshot: SHOTS.map((s) => ({ "@type": "ImageObject", url: `${siteUrl}/shots/${s.file}.webp`, width: SHOT_W, height: SHOT_H, caption: s.alt })),
       publisher: { "@id": siteUrl + "/#org" }, sameAs: [STORE_URL],
       url: siteUrl, installUrl: STORE_URL, downloadUrl: STORE_URL,
       description: route.desc,
@@ -109,6 +127,7 @@ export function schemaFor(route, siteUrl) {
       author: { "@id": siteUrl + "/#org" },
       publisher: { "@id": siteUrl + "/#org" },
       citation: route.answer.sources?.map((s) => ({ "@type": "CreativeWork", name: s.name, url: s.url })),
+      ...entities(route.title, route.answer.html),
       isPartOf: { "@id": siteUrl + "/#site" },
     });
   }
@@ -183,5 +202,5 @@ export function schemaFor(route, siteUrl) {
   return blocks;
 }
 
-export { ROUTES, STORE_URL };
+export { ROUTES, STORE_URL, SHOTS };
 export { ORIGIN } from "./routes.js";

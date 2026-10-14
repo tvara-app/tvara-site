@@ -3,6 +3,8 @@ import Prose from "../components/Prose.jsx";
 import { ANSWERS } from "../answers.js";
 import { STORE_URL } from "../routes.js";
 
+/* Hub of the answer cluster: every other article links to it from the byline. */
+const HUB = "answers/long-chat-toolkit";
 const DATE = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 
 /* One article. The "more" list is every other answer, so each page links to the
@@ -12,7 +14,8 @@ const DATE = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", y
    a div, so the "Short answer" paragraph stays the first p the dek rule styles. */
 export default function Answer({ item }) {
   const more = ANSWERS.filter((a) => a.slug !== item.slug);
-  const byline = `<div class="byline">Updated <time datetime="${item.updated}">${DATE.format(new Date(item.updated))}</time> · <a href="/about">Tvara team</a></div>`;
+  const hub = item.slug === HUB ? "" : ` · Part of the <a href="/${HUB}">long chat toolkit</a>`;
+  const byline = `<div class="byline">Updated <time datetime="${item.updated}">${DATE.format(new Date(item.updated))}</time> · <a href="/about">Tvara team</a>${hub}</div>`;
   return (
     <section data-section="Answer">
       <Reveal><Prose html={item.html.replace("</h1>", "</h1>" + byline)} /></Reveal>

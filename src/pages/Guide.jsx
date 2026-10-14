@@ -26,7 +26,7 @@ export default function Guide() {
           <p>There is nothing to configure before it works. Install it, open a long chat, and the strip appears on the right edge.</p>
         </Reveal>
         <Reveal className="grid" stagger>
-          {STEPS.map(([h, p]) => <SpotlightCard key={h}><h3>{h}</h3><p>{p}</p></SpotlightCard>)}
+          {STEPS.map(([h, p]) => <SpotlightCard key={h}><h2 className="h3">{h}</h2><p>{p}</p></SpotlightCard>)}
         </Reveal>
       </section>
 

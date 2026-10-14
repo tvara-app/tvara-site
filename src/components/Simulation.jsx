@@ -37,16 +37,16 @@ const TOOLS = [
 
 function Message({ m, i }) {
   return (
-    <article className={`sim-msg ${m.r}`} data-i={i} data-h={m.h || ""} data-code={m.code ? "1" : ""}>
+    <div className={`sim-msg ${m.r}`} data-i={i} data-h={m.h || ""} data-code={m.code ? "1" : ""}>
       <p data-sim-text>{m.x}</p>
       {m.code && <pre className="sim-code">{m.code}</pre>}
-      <footer>
+      <div className="sim-meta">
         <span className="sim-time">{m.t}</span>
         <button type="button" className="sim-star" data-sim-star aria-pressed="false" aria-label="Star this message">
           <Svg d={I.star} s={13} />
         </button>
-      </footer>
-    </article>
+      </div>
+    </div>
   );
 }
 
